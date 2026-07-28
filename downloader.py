@@ -7,11 +7,12 @@ from pathlib import Path
 
 class Downloader:
     async def download(self,url,filename):
-
+     try:
         async with aiohttp.ClientSession() as client:
 
             async with client.get(url) as response:
-
+                
+                response.raise_for_status()
                 content = await response.read()
 
         download_folder = Path("downloads")
@@ -24,7 +25,9 @@ class Downloader:
             await file.write(content)
 
 
-        print(f"{filename} downloaded successfully")            
+        print(f"{filename} downloaded successfully")    
+     except Exception as Error:
+        print(f"{filename} has failed due to {Error}")            
 
                 
 

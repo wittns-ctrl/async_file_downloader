@@ -18,7 +18,7 @@ async def main():
 
                         limits(downloader,"https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf","dummy.txt"),
                         limits(downloader,"https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf","dummy.txt"),
-                        limits(downloader,"https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf","dummy.txt"))
+                        limits(downloader,"https://www.w3.org/file-does-not-exist.pdf","dummy.txt"))
 
 if __name__ == "__main__":
     asyncio.run(main())
