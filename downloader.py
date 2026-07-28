@@ -27,7 +27,10 @@ class Downloader:
 
         async with aiofiles.open(file_path,'wb') as file:
 
-            await file.write(content)
+            async for chunk in response.content.iter_chunked(8192):
+            
+
+               await file.write(chunk)
                    
 
 
