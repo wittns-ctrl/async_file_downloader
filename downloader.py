@@ -1,9 +1,33 @@
 #downloads files
 
 import aiohttp
+import aiofiles
+from pathlib import Path
 
 
 class Downloader:
-    async def download(self):
-        print("file downloaded")
+    async def download(self,url,filename):
+
+        async with aiohttp.ClientSession() as client:
+
+            async with client.get(url) as response:
+
+                content = await response.read()
+
+        download_folder = Path("downloads")
+        download_folder.mkdir(exist_ok=True)
+
+        file_path = download_folder/filename
+
+        async with aiofiles.open(file_path,'wb') as file:
+
+            await file.write(content)
+
+
+        print(f"{filename} downloaded successfully")            
+
+                
+
+       
+        
    
