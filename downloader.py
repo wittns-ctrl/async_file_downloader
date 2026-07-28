@@ -11,7 +11,9 @@ class Downloader:
      for attempt in range(1,4):
       try:
         print(f"Attempt : {attempt} downloading:{filename}")
-        async with aiohttp.ClientSession() as client:
+
+        timeout = aiohttp.ClientTimeout(total=10)
+        async with aiohttp.ClientSession(timeout=timeout) as client:
 
             async with client.get(url) as response:
 
@@ -30,7 +32,9 @@ class Downloader:
 
 
         print(f"{filename} downloaded successfully")
-        break    
+        break 
+      except asyncio.TimeoutError:
+         print(f"{filename} has been timed out")   
       except Exception as Error:
         print(f"{filename} has failed due to {Error}") 
 
